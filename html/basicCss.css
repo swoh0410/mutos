@@ -1,0 +1,34 @@
+
+*{
+	background: white;
+	margin: 0px;
+	padding: 0px;	
+}
+body{
+	text-align:center;
+}
+#main_panel{
+	border: 1px solid black;
+	width: 1000px;
+	margin: 350px auto;
+}
+#image{
+height: 500px;
+	width: 500px;	
+} 
+#login_panel{
+	float: right;
+	height: 500px;
+	width: 500px;
+}
+/*total width= 1000px used = 880px current = 120px.*/
+#login_image{
+	margin: 0px auto;
+	padding: 0px auto;
+}
+#center_table{
+	text-align:right;
+	margin-top: 150px;
+	
+}
+
