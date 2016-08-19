@@ -9,8 +9,7 @@
 	
 	<script>
 		$( function() {
-			$( "#datepicker" ).datepicker();
-			dateFormat: 'DD, MM d, yy'
+			$( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
 		} );
   </script>
 
@@ -21,10 +20,10 @@
 		<form action = "register_process.php" method = "POST">
 			<tr><td>NAME</td><td><input type="text" name="name"></td></tr>
 			<tr><td>ID</td><td><input type="text" name="id"></td></tr>
-			<tr><td>password</td><td><input type="text" name="password_hash"></td></tr>
-			<tr><td>Date Of Birth </td><td><input type="text" id="datepicker" name="date" 
-												style="width:175px"></td></tr>
+			<tr><td>password</td><td><input type="password" name="password_hash"></td></tr>
+			<tr><td>Date Of Birth </td><td><input type="text" id="datepicker" name="dob" style="width:175px"></td></tr>
 			<tr><td>email</td><td><input type="text" name="email"></td></tr>
+			<tr><td></td><td><input type="submit" value = "Register"></td></tr>
 		</form>
 	</table>
 	</div>
