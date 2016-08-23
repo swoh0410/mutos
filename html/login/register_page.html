@@ -8,30 +8,9 @@
 	<link rel = "stylesheet" href = "basicCss.css">
 	
 	<script>
-		
-		function checkID(){
-			var unusedID = '';
-			$.ajax({
-				url: 'id_check_ajax.php',
-				dataType: 'html',
-				data: {preferred_id:$('#preferred_id').val()},
-				async:false,
-				success: function (result){
-					document.getElementById('ID_availability_message').value = result;
-				},
-				error: function(xhr) {
-					alert('Check ID AJAX failed.');
-				},
-				timeout : 3000
-			});
-			
-		}
-		
-		
 		$( function() {
 			$( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
 		} );
-		
   </script>
 
 </head>
@@ -42,10 +21,7 @@
 		<form action = "register_process.php" method = "POST">
 		
 			<tr><td>NAME</td><td><input type="text" name="name"></td></tr>
-			<tr><td>ID</td><td><input type="text" id = "preferred_id" name="id"></td>
-				<td><input type = "button" id = "checkButton" onclick = "checkID();" value = "check"></td>
-			</tr>
-			<tr><td></td><td><input type = "text" id = "ID_availability_message" value = "CHECK YOUR ID" disabled></td></tr>
+			<tr><td>ID</td><td><input type="text" name="id"></td></tr>
 			<tr><td>password</td><td><input type="password" name="password_hash"></td></tr>
 			<tr><td>Date Of Birth </td><td><input type="text" id="datepicker" name="dob" style="width:175px"></td></tr>
 			<tr><td>email</td><td><input type="text" name="email"></td></tr>
@@ -55,7 +31,3 @@
 	</div>
 </body>
 </html>
-
-<script>
-
-</script>
