@@ -11,8 +11,23 @@ h1{
 h2{
 	font-size:300%;
 }
+
 body{
 	text-align:center;
+}
+/* 이렇게 할 수도 있다.
+input[type="text"]{
+	width:250px;
+}
+input[type="password"]{
+	width:250px;
+}
+input[type="text"]{
+	width:250px;
+}
+*/
+#register_header{
+	text-align:left;
 }
 #main_panel{
 
@@ -45,3 +60,8 @@ body{
 #login_button{
 	float:left;
 }
+/*
+#password_description{
+	width:250px;
+}
+*/

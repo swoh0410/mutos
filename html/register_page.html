@@ -6,7 +6,23 @@
 	<script type="text/javascript" src="/jquery/jquery-ui.js"></script>
 	<link rel="stylesheet" href="/jquery/themes/base/jquery-ui.css" />
 	<link rel = "stylesheet" href = "basicCss.css">
-	
+	<style>
+	td:nth-child(2){
+		width:250px;
+	}
+	input[type="text"]{
+		width:250px;
+	}
+	input[type="password"]{
+		width:250px;
+	}
+	input[type="text"]{
+		width:250px;
+	}
+	table{
+		border-spacing: 10px;
+	}
+	</style>
 	<script>
 		
 		function checkID(){
@@ -14,7 +30,7 @@
 			var checkIdMessage = '';
 			var registerable = false;
 			$.ajax({
-				url: 'id_check_ajax.php',
+				url: 'id_check_-jax.php',
 				dataType: 'json',
 				data: {preferred_id:$('#preferred_id').val()},
 				async:false,
@@ -22,13 +38,13 @@
 					list = result;
 					if(list['num'] === 0){ // 아이디가 사용중이 아니면. '0'이 나옴.
 						checkIdMessage =  " This ID can be used!";
-						$('#ID_availability_message').val(checkIdMessage);
+						$('#ID_availability_message').text(checkIdMessage);
 						$('#ID_availability_message').css("color","green");
 						$('#ID_availability_message').css("font-weight","bold");
 						$('#ID_availability_message').css('color', 'green');
 					}else if(list['num'] === 1){ // 아이디가 사용중이 아니면. '0'이 나옴.
 						checkIdMessage = "This ID is already in use!";
-						document.getElementById('ID_availability_message').value = checkIdMessage;
+						document.getElementById('ID_availability_message').textContent = checkIdMessage;
 						document.getElementById('ID_availability_message').style.fontWeight="bold";
 						document.getElementById("ID_availability_message").style.color = "red";
 					}else{
@@ -36,7 +52,8 @@
 					}
 				},
 				error: function(xhr) {
-					alert('Check ID AJAX failed.');
+					alert(JSON.stringify(xhr));
+					alert('Please Entre ID you wish to use.');
 				},
 				timeout : 3000
 			});
@@ -46,23 +63,31 @@
 		$(document).ready(function(){
 		
 			$( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+			$(document).tooltip();
 			
 		});
 		
 		function checkPassword(){
-			var checkPwMessage = "Password must have at lease one uppercase, lowercase, and minimum length of 4";
+			var checkPwMessage = "Invalid Password";
 			
-			var pwRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/;
-				if($('#password_field').val().search(pwRegex) === 0){
-				checkPwMessage = 'Password validated';
-					$('#PW_availability_message').val(checkPwMessage);
-					$('#PW_availability_message').css('color','green');
-					$('#PW_availability_message').css('font-weight','bold');
-				}else{
-					document.getElementById('PW_availability_message').value=checkPwMessage;
-					document.getElementById('PW_availability_message').style.color = 'red';
-					document.getElementById('PW_availability_message').style.fontWeight = 'bold';
-				}
+			if($('#password_field').val() === ""){
+				$('#PW_availability_message').text("please enter password you wish to use.");
+				$('#PW_availability_message').css('color','black');
+				$('#PW_availability_message').css('font-weight','normal');
+			}else{
+				var pwRegex =/(?=^.{5,8}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?\/&gt;.&lt;,])(?!.*\s).*$/;
+					if($('#password_field').val().search(pwRegex) === 0){
+					checkPwMessage = 'Password validated';
+						$('#PW_availability_message').text(checkPwMessage);
+						$('#PW_availability_message').css('color','green');
+						$('#PW_availability_message').css('font-weight','bold');
+					}else{
+						document.getElementById('PW_availability_message').textContent=checkPwMessage;
+						document.getElementById('PW_availability_message').style.color = 'red';
+						document.getElementById('PW_availability_message').style.fontWeight = 'bold';
+					}
+			}
+			
 		}
 		
 		
@@ -72,39 +97,55 @@
 <body>
 	<div id= "main_panel">
 	<table>
-		<h2>Register MUTOS</h2>
+		<h2 id = "register_header">Register MUTOS</h2>
+		<br>
 		<form action = "register_process.php" method = "POST">
 		
 			<tr>
-				<td>NAME</td><td><input type="text" name="name"></td>
+				<td title = "성을 입력하세요. 请输入您的姓氏。">FAMILY NAME</td>
+				<td> <input type="text" name="name" title = "Please entre your Surname."></td>
 			</tr>
 			<tr>
-				<td>ID</td>
-				<td><input type="text" id = "preferred_id" name="preferred_id"></td>
+				<td  title = "이름을 입력하세요. 输入名字。">FIRST NAME</td>
+				<td> <input type="text" name="name" title = "Please entre your Given Name"></td>
+			</tr>
+			<tr>
+				<td title = "아이디. 用户名。">ID</td>
+				<td><input type="text" id = "preferred_id" name="preferred_id" title="Please entre ID you wish to use."></td>
 				<td><input type = "button" id = "checkButton" onclick = "checkID();" value = "check"></td>
 			</tr>
 			<tr><td></td>
-				<td><input type = "text" id = "ID_availability_message" value = "CHECK YOUR ID" disabled></td>
+				<td><span type = "text" id = "ID_availability_message"> CHECK YOUR ID</td>
 			</tr>
 			<tr>
-				<td>password</td>
-				<td><input type="password" id = "password_field"name="password_field" oninput = "checkPassword();"></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type = "text" id = "PW_availability_message" value = "" disabled></td>
-			</tr>
-			<tr>
-				<td>Date Of Birth </td>
-				<td><input type="text" id="datepicker" name="dob" style="width:175px"></td>
-			</tr>
-			<tr>
-				<td>email</td>
-				<td><input type="text" name="email"></td>
+				<td title = "비밀번호. 密码。">PASSWORD</td>
+				<td><input type="password" id = "password_field"name="password_field" oninput = "checkPassword();" title = "Password must contain at least one lowercase, uppercase, digit, and a special symbol each."></td>
+				
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value = "Register"></td>
+				<td><span id = "PW_availability_message">Please enter password you wish to use.</span></td>
+			</tr>
+			<tr>
+				<td title = "생년월일. 出生日期">DATE OF BIRTH </td>
+				<td><input type="text" id="datepicker" name="dob" title = "Click to select your Date Of Birth"></td>
+			</tr>
+			<tr>
+				<td title = "이메일 주소. 电子邮件地址。">EMAIL</td>
+				<td><input type="text" name="email" title = "Please entre email you wish to use."></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td>
+					<label for="male">Male</label>
+					<input type="radio" id = "male" name ="gender" value = "male"> 
+					<label for="female">Female</label>
+					<input type="radio" id = "female" name ="gender" value = "female">
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="button" value = "Register"></td>
 			</tr>
 		</form>
 	</table>
@@ -114,4 +155,4 @@
 
 <script>
 
-</script>
+</script
