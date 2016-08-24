@@ -10,14 +10,30 @@
 	<script>
 		
 		function checkID(){
-			var unusedID = '';
+			var list = [];
+			var checkIdMessage = '';
+			var registerable = false;
 			$.ajax({
 				url: 'id_check_ajax.php',
-				dataType: 'html',
+				dataType: 'json',
 				data: {preferred_id:$('#preferred_id').val()},
 				async:false,
 				success: function (result){
-					document.getElementById('ID_availability_message').value = result;
+					list = result;
+					if(list['num'] === 0){ // 아이디가 사용중이 아니면. '0'이 나옴.
+						checkIdMessage =  " This ID can be used!";
+						$('#ID_availability_message').val(checkIdMessage);
+						$('#ID_availability_message').css("color","green");
+						$('#ID_availability_message').css("font-weight","bold");
+						$('#ID_availability_message').css('color', 'green');
+					}else if(list['num'] === 1){ // 아이디가 사용중이 아니면. '0'이 나옴.
+						checkIdMessage = "This ID is already in use!";
+						document.getElementById('ID_availability_message').value = checkIdMessage;
+						document.getElementById('ID_availability_message').style.fontWeight="bold";
+						document.getElementById("ID_availability_message").style.color = "red";
+					}else{
+						alert("Error Found! register_page! NOT 0 or 1.");
+					}
 				},
 				error: function(xhr) {
 					alert('Check ID AJAX failed.');
@@ -27,10 +43,28 @@
 			
 		}
 		
+		$(document).ready(function(){
 		
-		$( function() {
 			$( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
-		} );
+			
+		});
+		
+		function checkPassword(){
+			var checkPwMessage = "Password must have at lease one uppercase, lowercase, and minimum length of 4";
+			
+			var pwRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/;
+				if($('#password_field').val().search(pwRegex) === 0){
+				checkPwMessage = 'Password validated';
+					$('#PW_availability_message').val(checkPwMessage);
+					$('#PW_availability_message').css('color','green');
+					$('#PW_availability_message').css('font-weight','bold');
+				}else{
+					document.getElementById('PW_availability_message').value=checkPwMessage;
+					document.getElementById('PW_availability_message').style.color = 'red';
+					document.getElementById('PW_availability_message').style.fontWeight = 'bold';
+				}
+		}
+		
 		
   </script>
 
@@ -41,15 +75,37 @@
 		<h2>Register MUTOS</h2>
 		<form action = "register_process.php" method = "POST">
 		
-			<tr><td>NAME</td><td><input type="text" name="name"></td></tr>
-			<tr><td>ID</td><td><input type="text" id = "preferred_id" name="id"></td>
+			<tr>
+				<td>NAME</td><td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>ID</td>
+				<td><input type="text" id = "preferred_id" name="preferred_id"></td>
 				<td><input type = "button" id = "checkButton" onclick = "checkID();" value = "check"></td>
 			</tr>
-			<tr><td></td><td><input type = "text" id = "ID_availability_message" value = "CHECK YOUR ID" disabled></td></tr>
-			<tr><td>password</td><td><input type="password" name="password_hash"></td></tr>
-			<tr><td>Date Of Birth </td><td><input type="text" id="datepicker" name="dob" style="width:175px"></td></tr>
-			<tr><td>email</td><td><input type="text" name="email"></td></tr>
-			<tr><td></td><td><input type="submit" value = "Register"></td></tr>
+			<tr><td></td>
+				<td><input type = "text" id = "ID_availability_message" value = "CHECK YOUR ID" disabled></td>
+			</tr>
+			<tr>
+				<td>password</td>
+				<td><input type="password" id = "password_field"name="password_field" oninput = "checkPassword();"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type = "text" id = "PW_availability_message" value = "" disabled></td>
+			</tr>
+			<tr>
+				<td>Date Of Birth </td>
+				<td><input type="text" id="datepicker" name="dob" style="width:175px"></td>
+			</tr>
+			<tr>
+				<td>email</td>
+				<td><input type="text" name="email"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value = "Register"></td>
+			</tr>
 		</form>
 	</table>
 	</div>

@@ -15,14 +15,11 @@ function check_id_process($preferred_id){
 	$result = mysqli_stmt_get_result($stmt);
 	$row = mysqli_fetch_assoc($result); //아이디 있는지 여부를 알아와서 저장.아직 Array 형식.
 	
-	if(intval($row['num']) === 0){ // 아이디가 사용중이 아니면. '0'이 나옴.
-		$return_value =  " This ID can be used.";
-	}else if(intval($row['num']) === 1){ //아이디가 사용중이면 '1'이 나옴
-		$return_value = " This ID is already in use!";
-	}else{ // 찾아온 값이 0,1이 아니면 에러
-		echo $row['num'] . " <-returned value/////checkID값이 1,이나 0이 아님. 에러!!!";
-	}
-	return $return_value;
+	
+	
+	$row['num'] = intval($row['num']);
+	return json_encode($row);
+	
 }
 	
 echo check_id_process($preferred_id);
