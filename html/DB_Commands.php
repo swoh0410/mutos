@@ -16,60 +16,94 @@
 	$cols['key2'] = "value2";
 	$cols['key3'] = "value3";
 	$cols['key4'] = "value4";
-	insertDB("conn", "TestTable", $cols);
+	insertDB("mysql_conn", "TestTable", $cols);
 	*/
 	function checkID(){
 		$mysql_conn = db_swoh_mutos_conn_info();
-		$stmt = mysqli_prepare($mysql_conn, "SELECT count(*) FROM user_account WHERE id = ?");
-		mysqli_stmt_bind_param($stmt,"s",$id);
+		$mysql_conn = db_swoh_mutos_conn_info();
+	
+		$stmt = mysqli_prepare($mysql_conn, "SELECT count(*) as num FROM user_account WHERE id = ?");
+		mysqli_stmt_bind_param($stmt,"s",$preferred_id);
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
-		if (mysqli_num_rows($result) != 0) { // 이미 등록된 아이디
-			header('Location: error.php?error_code=4');
-		} else {
-			mysqli_free_result($result);
-			mysqli_close($conn);
-			echo "사용가능한 ID입니다.";
-		}
+		$row = mysqli_fetch_assoc($result); //아이디 있는지 여부를 알아와서 저장.아직 Array 형식.
+		mysqli_free_result($result);
+		mysqli_close($mysql_conn);
+		
+		return $row['num'];
 	}
 	function insertDB($mysql_conn, $table, $cols){
 		$fields = "";
-		$values = "";
+		//$values = "";
+		$values = array();
 		$number_of_fields = count($cols);
 		$counter = 1;
+		$success = '';
+		$value_question_marks = '';
+		$column_types = '';
 		
 		foreach($cols as $key => $value){
 			if($counter < $number_of_fields){
-				$fields = $fields . $key . ", ";
-				$values = $values . "\"" . $value . "\"".", ";
+				$fields = $fields . $key . ', ';
+			//	$values = $values . "\"" . $value . "\"".", ";
+				$values[] = $value;
+				$value_question_marks = $value_question_marks . '?' . ', ';
 			}else{
 				$fields = $fields . $key;
-				$values = $values . "\"" . $value . "\"";
+			//	$values = $values . "\"" . $value . "\"";
+				$values[] = $value;
+				$value_question_marks = $value_question_marks. '?';
 			}
 			$counter++;
+			
+
+			switch(gettype($value)){
+				case 'string': $column_types = $column_types . 's';
+				break;
+				case 'integer': $column_types = $column_types . 'i';
+				break;
+				case 'double': $column_types = $column_types . 'd';
+				break;
+			}
 		}
 	
-		echo " <br> TABLE: " . $table . "<br>"
-		."Fields: " . $fields . "<br>"
-		."Values: " . $values . "<br>";
+		//echo " <br> TABLE: " . $table . "<br>"
+		//."Fields: " . $fields . "<br>"
+		//."Values: " . $values . "<br>";
 		
+		//test
+		//echo "<br> FIELD Q => " . $field_question_marks . "<br>".
+		//"<br> VALUES Q => " . $value_question_marks . "<br>".
+		//"<br> stmt Q => " . "INSERT INTO ".$table." (".$fields.") VALUES //(". $value_question_marks .")" . "<br>type->>>>" . $column_types. "";
 		
-		$insert_query = sprintf('INSERT INTO %s (%s) VALUES (%s)', $table, $fields,$values);
-		$stmt = mysqli_prepare($conn,"INSERT INTO ? (?) VALUES (?)");
-		mysqli_stmt_bind_param($stmt, "sss", $table, $fields,$values);
+		$query = "INSERT INTO " . $table . " (". $fields .") VALUES (" .$value_question_marks . ")";
+		//echo ">>>>>>>>>".$query . ">>>>>>>>>>>" . $column_types;
+		$stmt = mysqli_prepare($mysql_conn, $query);
+		$params= array_merge(array($column_types), $values);
+		//mysqli_stmt_bind_param($stmt, $column_types,$values);
+		$binding_stmt = array($stmt, 'bind_param');
+		call_user_func_array($binding_stmt,makeValuesReferenced($params));
 		mysqli_stmt_execute($stmt);
-		mysqli_free_result($result);
-		mysqli_close($conn);
-		header('Location:index.html');
 		
-		echo $insert_query . "<br>";
+		//echo $query . "<br>";
 			
-		if(mysqli_query($mysql_conn, $insert_query) === false) {
-			echo mysqli_error ($mysql_conn);
+		if(mysqli_stmt_execute($stmt) === false) {
+			$successful = false;
+			echo "FALSE";
 		}else{
-			echo 'DB INSERT 성공<br>';
+			$successful = true;
+			echo "TRUE";
 		}
-		
-		
+		return $successful;
 	}
+	
+	
+	function makeValuesReferenced($arr){ 
+        $refs = array(); 
+        foreach($arr as $key => $value) 
+        $refs[$key] = &$arr[$key]; 
+        return $refs; 
+
+    } 
+	
 ?>
