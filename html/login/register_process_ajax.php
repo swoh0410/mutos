@@ -1,5 +1,5 @@
 <?php
-	require_once 'DB_Commands.php';
+	require_once '../DB_Commands.php';
 	
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$cols['id'] = $_POST["preferred_id"];
