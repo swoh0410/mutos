@@ -18,10 +18,8 @@
 	$cols['key4'] = "value4";
 	insertDB("mysql_conn", "TestTable", $cols);
 	*/
-	function checkID(){
+	function checkID($preferred_id){
 		$mysql_conn = db_swoh_mutos_conn_info();
-		$mysql_conn = db_swoh_mutos_conn_info();
-	
 		$stmt = mysqli_prepare($mysql_conn, "SELECT count(*) as num FROM user_account WHERE id = ?");
 		mysqli_stmt_bind_param($stmt,"s",$preferred_id);
 		mysqli_stmt_execute($stmt);
@@ -74,26 +72,25 @@
 		//test
 		//echo "<br> FIELD Q => " . $field_question_marks . "<br>".
 		//"<br> VALUES Q => " . $value_question_marks . "<br>".
-		//"<br> stmt Q => " . "INSERT INTO ".$table." (".$fields.") VALUES //(". $value_question_marks .")" . "<br>type->>>>" . $column_types. "";
+		//"<br> stmt Q => " . "INSERT INTO ".$table." (".$fields.") VALUES //("; var_dump($values); echo ")" . "<br>type->>>>" . $column_types. "";
 		
-		$query = "INSERT INTO " . $table . " (". $fields .") VALUES (" .$value_question_marks . ")";
+		$insert_query = "INSERT INTO " . $table . " (". $fields .") VALUES (" .$value_question_marks . ")";
 		//echo ">>>>>>>>>".$query . ">>>>>>>>>>>" . $column_types;
-		$stmt = mysqli_prepare($mysql_conn, $query);
+		$stmt = mysqli_prepare($mysql_conn, $insert_query);
 		$params= array_merge(array($column_types), $values);
 		//mysqli_stmt_bind_param($stmt, $column_types,$values);
 		$binding_stmt = array($stmt, 'bind_param');
 		call_user_func_array($binding_stmt,makeValuesReferenced($params));
-		mysqli_stmt_execute($stmt);
 		
 		//echo $query . "<br>";
 			
 		if(mysqli_stmt_execute($stmt) === false) {
 			$successful = false;
-			echo "FALSE";
+			echo mysqli_error($mysql_conn);
 		}else{
 			$successful = true;
-			echo "TRUE";
 		}
+		mysqli_close($mysql_conn);
 		return $successful;
 	}
 	

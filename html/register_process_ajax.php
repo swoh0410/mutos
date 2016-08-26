@@ -1,10 +1,4 @@
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel = "stylesheet" href = "basicCss.css">
-</head>
-<body>
-	<?php
+<?php
 	require_once 'DB_Commands.php';
 	
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -15,15 +9,10 @@
 		$cols['dob'] = $_POST["dob"];
 		$cols['email'] = $_POST["email"];
 		$cols['gender'] = $_POST["gender"];
+		
 	}
-	
 	$return_value = '';
 	$mysql_conn = db_swoh_mutos_conn_info();
 	$table = 'user_account';
 	$registered['successful'] = insertDB($mysql_conn, $table, $cols);
-	return json_encode($registered['successful']);
-	
-	?>
-	<a href = "index.html"> HOME </a>
-</body>
-</html>
+	echo json_encode($registered);

@@ -40,20 +40,21 @@
 						first_name:$('#first_name').val(),
 						dob:$('#dob').val(),
 						email:$('#email').val(),
-						gender:$('#gender').val()
+						gender:$(".gender:checked()").val()
 					},
 				async:false,
 				success: function(result){
 					list = result;
 					if(list['successful'] === true){
 						alert("Congrats!You are successfully registered! ");
+						window.location.replace("/index.html");
 					}else{
 						alert("Sorry! You've not been registered! Due to some technical problem.");
 					}
 					
 				},
 				error: function(xhr) {
-						alert("HERE: <br>"+JSON.stringify(xhr));
+						alert("HERE: "+JSON.stringify(xhr));
 						alert('ERROR!!!! JSON');
 					},
 					timeout : 3000
@@ -184,9 +185,9 @@
 				<td>Gender</td>
 				<td>
 					<label for="male">Male</label>
-					<input type="radio" id = "gender" name ="gender" value = "male"> 
+					<input type="radio" class="gender" id = "male" name ="gender" value = "male"> 
 					<label for="female">Female</label>
-					<input type="radio" id = "gender" name ="gender" value = "female">
+					<input type="radio" class="gender"  id = "female" name ="gender" value = "female">
 				</td>
 			</tr>
 			<tr>
