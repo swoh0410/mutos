@@ -4,6 +4,7 @@
 	margin: 0px;
 	padding: 0px;	
 	font-family:"Comic Sans MS";
+	border:1px solid blue;
 }
 h1{
 	font-size: 700%
@@ -26,6 +27,28 @@ input[type="text"]{
 	width:250px;
 }
 */
+#top_header{
+	background:yellow;
+}
+#home_button{
+	float:left;
+	margin-left:5px;
+}
+#log_out{
+	float:right;
+	margin-right:5px;
+	margin-left:5px;
+	
+}
+#my_page{
+	float:right;
+	margin-right:5px;
+}
+#search_bar{
+	width:250px;
+	height:25px;
+}
+
 #register_header{
 	text-align:left;
 }
