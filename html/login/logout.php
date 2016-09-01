@@ -6,4 +6,4 @@ start_session();
 try_to_logout();
 destroy_session();
 
-header('Location: /index.html');
+header('Location: ../index.php');

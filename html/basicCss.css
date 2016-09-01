@@ -1,4 +1,4 @@
-
+﻿
 *{
 	background: white;
 	margin: 0px;
@@ -27,8 +27,16 @@ input[type="text"]{
 	width:250px;
 }
 */
+
 #top_header{
 	background:yellow;
+	margin-top: 0px;
+	height: 100px;
+}
+#header_menus{
+	padding-top:30px;
+	padding-left:480px;
+	padding-right: 540px;
 }
 #home_button{
 	float:left;
@@ -37,12 +45,12 @@ input[type="text"]{
 #log_out{
 	float:right;
 	margin-right:5px;
-	margin-left:5px;
+	margin-left:15px;
 	
 }
 #my_page{
 	float:right;
-	margin-right:5px;
+	margin-right:15px;
 }
 #search_bar{
 	width:250px;
@@ -54,9 +62,9 @@ input[type="text"]{
 }
 #main_panel{
 
-	width: 1000px;
-	margin: 350px auto;
-	
+	width: 1007px;/*나중에 보더를 없애면 1000px로 바꿔주자.*/
+	margin-left: 500px;
+	margin-right: 500px;
 }
 #image{
 	height: 500px;

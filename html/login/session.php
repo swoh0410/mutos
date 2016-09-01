@@ -1,7 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/../includes/mylib.php";
-require_once '../DB_Commands.php';
-define("USER_ACCOUNTS_FILE_NAME", "user_accounts.txt");
+require_once $_SERVER["DOCUMENT_ROOT"].'/DB_Commands.php';
 
 //하나의 페이지에서 한번만 호출되어야 한다. 
 function start_session() {

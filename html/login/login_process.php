@@ -11,9 +11,10 @@ if (isset($_POST['id'], $_POST['password'])) {
     $id = $_POST['id'];
     $password = $_POST['password']; 
 	echo "login.php";
-	
+
     if (try_to_login($id, $password) == true) {
-        header('Location: protected_page.php');
+			//die("로그인 됨!!");
+        header("Location:/home/home.php");
     } else {
 		// 이멜주소 또는 비번이 등록되지 않았거나 틀림
 		die("LOGINPROCESS>>>>ID: ". $id . "PW>>>" . $password);
