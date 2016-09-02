@@ -7,7 +7,7 @@
 </head>
 <body>
 	<?php
-		require_once '/login/session.php';
+		require_once 'login/session.php';
 		require_once 'sessionInfo.php';
 		start_session();
 		if(isset($_SESSION['info_dto'])){
@@ -26,11 +26,11 @@
 			header("Location:home/home.php"); //로그인이 되어있으면 홈페이지로.
 		}else{
 	?>
-	<div id="main_panel">
+	<div id="index_main_panel">
 	
 		<div id="login_panel">
 		<h1> Coming Soon! </h1>
-			<table id="center_table">
+			<table id="login_table">
 			<tbody id "table_rows">
 				<form action="/login/login_process.php" method="POST">
 					<tr><th>Login<th><tr>
@@ -56,7 +56,7 @@
 			</table>
 		</div>
 		<div id = "login_image">
-			<img id="image" src="main_image.jpg" alt="login image" >
+			<img id="index_image" src="main_image.jpg" alt="login image" >
 		</div>
 	</div>
 	<?php } //로그인 체크 후 false떳을때 가로 닫히는곳.?>

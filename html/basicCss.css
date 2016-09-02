@@ -1,19 +1,19 @@
 ﻿
-*{
+*{ /*전체 세팅*/
 	background: white;
 	margin: 0px;
 	padding: 0px;	
 	font-family:"Comic Sans MS";
-	border:1px solid blue;
+	
 }
-h1{
+h1{/*모든 h1*/
 	font-size: 700%
 }
-h2{
+h2{/*모든 h2*/
 	font-size:300%;
 }
 
-body{
+body{/*모든 body*/
 	text-align:center;
 }
 /* 이렇게 할 수도 있다.
@@ -28,71 +28,159 @@ input[type="text"]{
 }
 */
 
+
+/*index.php*/
+#index_main_panel{
+	width: 1007px;/*나중에 보더를 없애면 1000px로 바꿔주자.*/
+	margin: 350px auto;
+}
+#login_panel{ /*인덱스 페이지 로그인 페널*/
+	float: right;
+	height: 500px;
+	width: 500px;
+}
+#login_table{/*login 틀을 만들어주는 테이블.*/
+	text-align:right;
+	margin: 75px auto;
+	
+}
+#login_image{ /*index_image를 담고 있는 div*/
+	margin: 0px auto;
+	padding: 0px auto;
+}
+#index_image{ /*index page 이미지.*/
+	height: 500px;
+	width: 500px;	
+} 
+#login_button{ /*로그인 버튼*/
+	float:left;
+}
+#register_link{ /*회원가입 페이지로 이동하는 링크*/
+	float:left;
+}
+
+
+
+
+/*register_page.html*/
+#register_page_title{/*회원가입 페이지에 오신것을 환영합니다! 같은.*/
+	text-align:left;
+}
+#register_main_panel{
+	width: 1007px;/*나중에 보더를 없애면 1000px로 바꿔주자.*/
+	margin-left: 500px;
+	margin-right: 500px;
+}
+
+
+/*header.html*/
 #top_header{
 	background:yellow;
 	margin-top: 0px;
 	height: 100px;
 }
-#header_menus{
+#header_menus{ /*헤더 메뉴들을 담고 있는 페널*/
 	padding-top:30px;
 	padding-left:480px;
 	padding-right: 540px;
 }
-#home_button{
+#header_home_button{/*home 으로 가는 버튼*/
 	float:left;
 	margin-left:5px;
 }
-#log_out{
+#header_log_out{/*로그아웃 버튼*/
 	float:right;
 	margin-right:5px;
 	margin-left:15px;
 	
 }
-#my_page{
+#header_my_page{/*내 프로필 페이지로 가는 버튼*/
 	float:right;
 	margin-right:15px;
 }
-#search_bar{
+#header_search_bar{/*검색창*/
 	width:250px;
 	height:25px;
 }
 
-#register_header{
-	text-align:left;
-}
-#main_panel{
+
+
+
+/*home.php*/
+#home_main_panel{
 
 	width: 1007px;/*나중에 보더를 없애면 1000px로 바꿔주자.*/
 	margin-left: 500px;
 	margin-right: 500px;
 }
-#image{
-	height: 500px;
-	width: 500px;	
-} 
-#login_panel{
-	float: right;
-	height: 500px;
-	width: 500px;
+
+
+
+/*user_page.php*/
+#user_page_main_panel{ 
+	width: 1007px;/*나중에 보더를 없애면 1000px로 바꿔주자.*/
+	margin-left: 500px;
+	margin-right: 500px;
 }
-/*total width= 1000px used = 880px current = 120px.*/
-#login_image{
-	margin: 0px auto;
-	padding: 0px auto;
+#profile_content{ /*프로필 사진과 정보를 담고있는 컨테이너*/
+	margin: 10px;
 }
-#center_table{
-	text-align:right;
-	margin: 75px auto;
+#profile_photo_panel{ /*프로필 사진 담는 div*/
+	margin: 10px 25px 10px 150px;/*top right bottom left*/
+	float: left;
+}
+#profile_right_panel{/*프로필 정보를 담고있는 div*/
+	float: left;
+	padding:10px;
+}
+#id_follow_edit_row{ /*id 와 follow, edit버튼이 있는 줄*/
+	width:400px;
+	height:35px;
+}
+
+#profile_user_id_panel{ /*프로필에 유저 아이디를 담은 div*/
+	float:left;
+	font-size:25px;
+	font-weight: bold;
+	text-align:left;
+}
+#profile_user_id{ /*프로필에 유저 아디디*/
+	padding: 0px 15px;
+}
+#follow_button_panel{/*follow button을 담은 div*/
+	float: left;
+	margin-left: 30px;
+	margin-top:5px;
+}
+#follow_button{/*follow button*/
+	font-size:20px;
+}
+#edit_button_panel{/*edit button을 담은 div*/
+	float:left;
+	margin-left:50px;
+	margin-top:5px;
+}
+#edit_button{/*edit button*/
+	font-size:20px;
+}
+
+#self_intro_panel{/*자기 페이지 설명글을 을 담은 div*/
+	margin:10px;
+	text-align:left;
+}
+#self_intro_span{/*자기 페이지 설명글*/
 	
 }
-#register_link{
+#profile_stats_ul{/*게시물, following follower 수를 보여주는 리스트를 담은 UL*/
+	clear:left;
+	margin:10px 0px;
+	
+}
+
+div div ul li{/*게시물, following follower 수를 보여주는 리스트
+3개의 div안에있는 ul 안에 있는 li를 아래와 같이 설정.*/
+	list-style-type:none;
 	float:left;
+	margin:0px 25px;
 }
-#login_button{
-	float:left;
-}
-/*
-#password_description{
-	width:250px;
-}
-*/
+
