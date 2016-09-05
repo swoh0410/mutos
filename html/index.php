@@ -8,7 +8,7 @@
 <body>
 	<?php
 		require_once 'login/session.php';
-		require_once 'sessionInfo.php';
+		require_once 'SessionInfo.php';
 		start_session();
 		if(isset($_SESSION['info_dto'])){
 			$infoDto = $_SESSION['info_dto'];
