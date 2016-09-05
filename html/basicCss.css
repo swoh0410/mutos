@@ -119,10 +119,13 @@ input[type="text"]{
 /*user_page.php*/
 #user_page_main_panel{ 
 	width: 1007px;/*나중에 보더를 없애면 1000px로 바꿔주자.*/
+	
 	margin-left: 500px;
 	margin-right: 500px;
 }
 #profile_content{ /*프로필 사진과 정보를 담고있는 컨테이너*/
+	width: 1007px;/*나중에 보더를 없애면 1000px로 바꿔주자.*/
+	height: 220px;
 	margin: 10px;
 }
 #profile_photo_panel{ /*프로필 사진 담는 div*/
