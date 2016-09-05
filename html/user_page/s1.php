@@ -6,7 +6,6 @@
 	<title>Mutos </title>
 	<script type="text/javascript" src="/jquery/jquery.js"></script>
 	<link rel = "stylesheet" href = "/basicCss.css">
-	<link rel = "stylesheet" href = "/mapStyle.css">
 <head>
 <body>
 <?php
@@ -17,7 +16,7 @@
 	$().ready(function(){
 		$('#top_header').load('/util/header.html');
 		$('#profile_panel').load('user_page_profile.html');
-		$('#map').load('/map/g_map.html');
+		
 	});
 </script>
 
@@ -27,10 +26,9 @@
 
 <div id = 'user_page_main_panel'>
 	<div id = 'profile_panel'> </div>
-	<div id = 'map'></div>
-	<div id = 'user_page_pics_panel'> <div>
+	<div id = 'map'>	</div>
 </div>
-</div>
+
 
 </body>
 
