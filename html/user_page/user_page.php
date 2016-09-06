@@ -18,7 +18,9 @@
 		$('#top_header').load('/util/header.html');
 		$('#profile_panel').load('user_page_profile.html');
 		$('#map').load('/map/g_map.html');
+		$('#pic_upload_panel').load('/user_page/post_photo_form.php');
 		$('#user_page_pics_panel').load('/user_page/pics_table.html');
+		
 	});
 </script>
 
@@ -29,6 +31,7 @@
 <div id = 'user_page_main_panel'>
 	<div id = 'profile_panel'> </div>
 	<div id = 'map'></div>
+	<div id = 'pic_upload_panel'></div>
 	<div id = 'user_page_pics_panel'> <div>
 </div>
 </div>

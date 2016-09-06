@@ -3,6 +3,7 @@
 	margin: 0px;
 	padding: 0px;	
 	font-family:"Comic Sans MS";
+	/*border: 1px solid blue;*/
 	
 }
 h1{/*모든 h1*/
@@ -187,9 +188,53 @@ div div ul li{/*게시물, following follower 수를 보여주는 리스트
 }
 
 /*지도 css는 따로 만들었다. mapStyle.css*/
-/*아래는 user page에 들어가는 사진 테이블 css. 실재로는 pics_table.html파일 내용이 대부분.*/
-#user_page_pics_panel{
+
+/*photo upload panel*/
+#pic_upload_panel{ /*사진 업로드 툴을 담고있는 하는 큰 페널*/
+	width: 1007px;
 	margin: 10px 50px;
-	float: left;
 }
+#caption_area_div{ /*캡션을 textarea가 들어가있는 div*/
+	float:left;
+}
+#upload_function_bar{ /*업로드 기능을 담고있는 menu bar*/
+	clear:left;
+	width: 1007px;
+	height:40px;
+}
+.upload_function_buttons{ /*upload_function_bar의 기능들*/
+		width:30px;
+		height:30px;
+		float:left;
+		margin: 0px 3px;
+}
+#add_pic_button_div{ /*사진 더하기 버튼 div*/
+	margin-left:0px;
+}
+
+#scope_button_div{/*정보 공개 범위 div 지금은 버튼이지만 바꿀꺼임. */
+	float:left;
+	margin-left:590px;
+}
+#scope_button{ /*사진 공개 범위 버튼*/
+	width:100px;
+	height:30px;
+}
+#upload_button_div{ /*사진올리기 버튼 div*/
+	float:left;
+	margin-left:10px;
+	
+}
+#upload_button{/*사진올리기 버튼*/
+	width:100px;
+	height:30px;
+}
+/*아래는 user page에 들어가는 사진 테이블 css. 실재로는 pics_table.html파일 내용이 대부분.*/
+
+#user_page_pics_panel{ /*사진들 모아놓는 패널. user_page에있는*/
+	width: 1007px;
+	margin: 10px 50px;
+}
+
+
 
