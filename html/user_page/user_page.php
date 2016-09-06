@@ -18,6 +18,7 @@
 		$('#top_header').load('/util/header.html');
 		$('#profile_panel').load('user_page_profile.html');
 		$('#map').load('/map/g_map.html');
+		$('#user_page_pics_panel').load('/user_page/pics_table.html');
 	});
 </script>
 

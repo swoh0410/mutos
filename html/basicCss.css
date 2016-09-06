@@ -186,3 +186,10 @@ div div ul li{/*게시물, following follower 수를 보여주는 리스트
 	margin:0px 25px;
 }
 
+/*지도 css는 따로 만들었다. mapStyle.css*/
+/*아래는 user page에 들어가는 사진 테이블 css. 실재로는 pics_table.html파일 내용이 대부분.*/
+#user_page_pics_panel{
+	margin: 10px 50px;
+	float: left;
+}
+
