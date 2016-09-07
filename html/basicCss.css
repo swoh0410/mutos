@@ -28,6 +28,11 @@ input[type="text"]{
 }
 */
 
+.row_cushion_div{
+	clear:left;
+	height:1px;
+	margin: 10px 0px;
+}
 
 /*index.php*/
 #index_main_panel{
@@ -189,7 +194,20 @@ div div ul li{/*게시물, following follower 수를 보여주는 리스트
 
 /*지도 css는 따로 만들었다. mapStyle.css*/
 
+/*파입 업로드 버튼이 있는 임시 div*/
+#add_pic_input{
+	float:left;
+}
+#preview_img{
+	float:left;
+	width:100%;
+	max-width:100px;
+}
 /*photo upload panel*/
+input[type="file"] {
+    display: none;
+}
+
 #pic_upload_panel{ /*사진 업로드 툴을 담고있는 하는 큰 페널*/
 	width: 1007px;
 	margin: 10px 50px;
@@ -211,7 +229,11 @@ div div ul li{/*게시물, following follower 수를 보여주는 리스트
 #add_pic_button_div{ /*사진 더하기 버튼 div*/
 	margin-left:0px;
 }
-
+#add_pic_label {
+      cursor: pointer;
+	width:30px;
+	height:30px;
+}
 #scope_button_div{/*정보 공개 범위 div 지금은 버튼이지만 바꿀꺼임. */
 	float:left;
 	margin-left:590px;

@@ -5,6 +5,7 @@
 	<meta charset = "utf-8">
 	<title>Mutos </title>
 	<script type="text/javascript" src="/jquery/jquery.js"></script>
+	<script type='text/javascript' src='/jquery/jquery.form.js'></script>
 	<link rel = "stylesheet" href = "/basicCss.css">
 	<link rel = "stylesheet" href = "/mapStyle.css">
 <head>
@@ -20,10 +21,60 @@
 		$('#map').load('/map/g_map.html');
 		$('#pic_upload_panel').load('/user_page/post_photo_form.php');
 		$('#user_page_pics_panel').load('/user_page/pics_table.html');
-		
 	});
+	
+	function uploadPic(){
+		alert("메서드로 버튼 눌림");
+			var img_file = new FormData($('#submitForm')[0]);
+			
+			$.ajax({
+				url: 'upload_pic_process_ajax.php',
+				type: 'POST',
+				dataType: 'json',
+				data:{
+					img_file:img_file,
+					caption:$('#caption_area').val()
+					//나중엔 테그,위치, 공개범위 등등도 보내야함.
+				},
+				async:false,
+				success: function(result){
+					if(list['uploaded'] === true){
+						alert("Congrats! The image is successfully uploaded!");
+					}else{
+						alert("WTF.. its not working!!! ");
+					}
+					
+				},
+				error: function(xhr){
+					alert("user_page.php ERROR"+JSON.stringify(xhr));
+				},
+				processData:false,
+				contentType:false,
+				timeout:6000
+				
+			});
+	}
+	
+	function previewPic(event){
+		var pic = document.getElementById('add_pic_input').value;
+		var preview_img = document.getElementById('preview_img');
+		preview_img.src = '';
+		if(pic != ''){
+			var picExt = pic.substring(pic.lastIndexOf('.') + 1);
+			var reg = /gif|jpg|jpeg|png/i; // 업로드가 가능한 확장자들.
+			if(reg.test(picExt) == false){
+				document.getElementById('error').innerHTML = 'gif,jpg,jpeng,png로된 이미지만 업로드락 가능합니다.';
+				return;
+			}
+			var reader = new FileReader();
+			reader.onload = function(){
+				preview_img.src = reader.result;
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	}
+	
 </script>
-
 
 <div id = "top_header"></div>
 	

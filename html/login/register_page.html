@@ -124,11 +124,13 @@
 			*/
 				var pwRegex =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,25}$/;
 					if($('#preferred_password').val().search(pwRegex) === 0){
+					/*Jquery 방식*/
 					checkPwMessage = 'Password validated';
 						$('#PW_availability_message').text(checkPwMessage);
 						$('#PW_availability_message').css('color','green');
 						$('#PW_availability_message').css('font-weight','bold');
 					}else{
+					/*javaScript 방식*/
 						document.getElementById('PW_availability_message').textContent=checkPwMessage;
 						document.getElementById('PW_availability_message').style.color = 'red';
 						document.getElementById('PW_availability_message').style.fontWeight = 'bold';
