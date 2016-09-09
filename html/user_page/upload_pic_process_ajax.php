@@ -11,7 +11,8 @@ function file_upload(){
 	$ext = $matches[0];
 	//$path = pathinfo($_FILES['file']['name']);
 	//$ext = strtolower($path['extension']); 이렇게 확장자를 알아보는 법도 있음.
-	$upload_file_name = $_SESSION['id'].'_'.microtime().$ext;
+	$microtime_string = str_replace('.','',str_replace(' ', '',microtime())); // 마이크로타임에 소수점 . 과 공백을 없애준다.
+	$upload_file_name = $_SESSION['id'].'_'.$microtime_string.$ext;
 	$target_dir_file_path = $target_dir . $upload_file_name;
 	$uploaded = false;
 	if(move_uploaded_file($_FILES['add_pic_input']['tmp_name'],$target_dir_file_path)){
