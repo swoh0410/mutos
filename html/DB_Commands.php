@@ -93,7 +93,18 @@
 		mysqli_close($mysql_conn);
 		return $successful;
 	}
-	
+	function get_user_account_pk($id){
+		$mysql_conn = db_swoh_mutos_conn_info();
+		$stmt = mysqli_prepare($mysql_conn, "SELECT user_account_pk FROM user_account WHERE id = ?");
+		mysqli_stmt_bind_param($stmt,"s",$id);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$row = mysqli_fetch_assoc($result); //결과값은 아레이 형식, 여기서는 $row['user_account_pk']라고 해야함 key=column name.
+		mysqli_free_result($result);
+		mysqli_close($mysql_conn);
+		
+		return $row['user_account_pk'];// pk값 리턴.
+	}
 	
 	function makeValuesReferenced($arr){ 
         $refs = array(); 

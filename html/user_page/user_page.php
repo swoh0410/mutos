@@ -24,35 +24,34 @@
 	});
 	
 	function uploadPic(){
+		var list = [];
 		alert("메서드로 버튼 눌림");
-			var img_file = new FormData($('#submitForm')[0]);
-			
-			$.ajax({
-				url: 'upload_pic_process_ajax.php',
-				type: 'POST',
-				dataType: 'json',
-				data:{
-					img_file:img_file,
-					caption:$('#caption_area').val()
-					//나중엔 테그,위치, 공개범위 등등도 보내야함.
-				},
-				async:false,
-				success: function(result){
-					if(list['uploaded'] === true){
-						alert("Congrats! The image is successfully uploaded!");
-					}else{
-						alert("WTF.. its not working!!! ");
-					}
-					
-				},
-				error: function(xhr){
-					alert("user_page.php ERROR"+JSON.stringify(xhr));
-				},
-				processData:false,
-				contentType:false,
-				timeout:6000
+		var img_file = new FormData($('#submitForm')[0]);
+		img_file.append('caption',$('#caption_area').val());
+		$.ajax({
+			url: 'upload_pic_process_ajax.php',
+			type: 'POST',
+			dataType: 'text',
+			data:img_file,
+			async:false,
+			success: function(result){
+				list = result;
+				alert(result);
+				//if(list['uploaded'] === true){
+				//	alert("Congrats! The image is successfully uploaded!");
+				//}else{
+				//	alert("WTF.. its not working!!! ");
+				//}
 				
-			});
+			},
+			error: function(xhr){
+				alert("user_page.php ERROR"+JSON.stringify(xhr));
+			},
+			processData:false,
+			contentType:false,
+			timeout:6000
+			
+		});
 	}
 	
 	function previewPic(event){
