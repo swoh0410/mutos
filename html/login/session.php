@@ -36,7 +36,8 @@ function destroy_session() {
 
  // start_session 호출된 후에 사용되어야 한다
 function try_to_login($id, $password) {
-	if (check_user_account($id, $password)) {
+	if(isset($_SESSION)){
+		if (check_user_account($id, $password)) {
 		$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 		$_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
 		$_SESSION['id'] = $id;
@@ -46,6 +47,10 @@ function try_to_login($id, $password) {
 	} else {
 		return false;
 	}
+	}else{
+		return false;
+	}
+	
 }
 
 

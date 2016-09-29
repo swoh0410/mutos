@@ -9,7 +9,6 @@
 		$cols['dob'] = $_POST["dob"];
 		$cols['email'] = $_POST["email"];
 		$cols['gender'] = $_POST["gender"];
-		
 	}
 	$return_value = '';
 	$mysql_conn = db_swoh_mutos_conn_info();

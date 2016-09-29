@@ -75,15 +75,12 @@
 		//"<br> stmt Q => " . "INSERT INTO ".$table." (".$fields.") VALUES //("; var_dump($values); echo ")" . "<br>type->>>>" . $column_types. "";
 		
 		$insert_query = "INSERT INTO " . $table . " (". $fields .") VALUES (" .$value_question_marks . ")";
-		//echo ">>>>>>>>>".$query . ">>>>>>>>>>>" . $column_types;
 		$stmt = mysqli_prepare($mysql_conn, $insert_query);
 		$params= array_merge(array($column_types), $values);
 		//mysqli_stmt_bind_param($stmt, $column_types,$values);
 		$binding_stmt = array($stmt, 'bind_param');
 		call_user_func_array($binding_stmt,makeValuesReferenced($params));
 		
-		//echo $query . "<br>";
-			
 		if(mysqli_stmt_execute($stmt) === false) {
 			$successful = false;
 			echo mysqli_error($mysql_conn);
@@ -113,5 +110,20 @@
         return $refs; 
 
     } 
+	
+	function get_photo_name_array($user_account_fk){ // 특정 유저가 올린 사진 다 가져오기.
+		$mysql_conn = db_swoh_mutos_conn_info();
+		$select_query = "SELECT photo_name FROM post WHERE user_account_fk = ? ORDER BY upload_date DESC";
+		$stmt = mysqli_prepare($mysql_conn, $select_query);
+		mysqli_stmt_bind_param($stmt,"s",$user_account_fk);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$photo_name_array = array();
+		while($row = mysqli_fetch_assoc($result)){
+				$photo_name_array [] = $row['photo_name'];
+				
+		}
+		return $photo_name_array;
+}
 	
 ?>

@@ -3,7 +3,7 @@ require_once '../DB_Commands.php';
 require_once '../login/session.php';
 //require_once '../Post.php';
 start_session();
-
+$upload_file_name = '';
 function file_upload(){
 	$target_dir = $_SERVER['DOCUMENT_ROOT']. '/../' . 'uploaded_images/';
 	$ext_reg = '/\.(gif|jpg|jpeg|png)$/';
@@ -12,7 +12,8 @@ function file_upload(){
 	//$path = pathinfo($_FILES['file']['name']);
 	//$ext = strtolower($path['extension']); 이렇게 확장자를 알아보는 법도 있음.
 	$microtime_string = str_replace('.','',str_replace(' ', '',microtime())); // 마이크로타임에 소수점 . 과 공백을 없애준다.
-	$upload_file_name = $_SESSION['id'].'_'.$microtime_string.$ext;
+	global $upload_file_name;
+	$upload_file_name = $_SESSION['id'] . '_' . $microtime_string . $ext;
 	$target_dir_file_path = $target_dir . $upload_file_name;
 	$uploaded = false;
 	if(move_uploaded_file($_FILES['add_pic_input']['tmp_name'],$target_dir_file_path)){
@@ -30,7 +31,7 @@ if(file_upload()){
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$cols['user_account_fk'] = get_user_account_pk($_SESSION['id']);
 		$cols['caption'] = $_POST['caption']; 
-		//$cols['file_name'] = $upload_file_name;
+		$cols['photo_name'] = $upload_file_name;
 	}
 	
 	$mysql_connection = db_swoh_mutos_conn_info();

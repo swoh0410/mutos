@@ -1,3 +1,5 @@
+
+
 <html>
 <div id = 'profile_content'>
 	<div id = 'profile_photo_panel'>
@@ -7,14 +9,17 @@
 	<div id = 'profile_right_panel'>
 		<div id = 'id_follow_edit_row'>
 			<div id = 'profile_user_id_panel'>
-				<span id = 'profile_user_id' type = 'text'> page user id</span>
+				<span id = 'profile_user_id' type = 'text'><?php echo $userId?></span>
 			</div>
-			<div id = 'follow_button_panel'>
-				<input id = 'follow_button' type = "button" value = "Follow">
-			</div>
-			<div id = 'edit_button_panel'>
-				<input id = 'edit_button' type = "button" value = "Edit">
-			</div>
+			<?php if($myId === $userId){?> <!-- 내 페이지일때만 보이는것들. -->
+					<div id = 'follow_button_panel'>
+					<input id = 'follow_button' type = "button" value = "Follow">
+					</div>
+					<div id = 'edit_button_panel'>
+						<input id = 'edit_button' type = "button" value = "Edit">
+					</div>
+			<?php }?>
+			
 		</div>
 		
 		<div id = 'self_intro_panel'>
